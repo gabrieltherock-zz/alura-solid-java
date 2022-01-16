@@ -1,22 +1,22 @@
 package br.com.gabriel.service;
 
-import br.com.gabriel.ValidacaoException;
 import br.com.gabriel.model.Funcionario;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.List;
 
 public class ReajusteService {
 
+    private final List<ValidacaoReajuste> validacoes;
+
+    public ReajusteService(List<ValidacaoReajuste> validacoes) {
+        this.validacoes = validacoes;
+    }
+
     public void reajustarSalarioDoFuncionaro(Funcionario funcionario, BigDecimal aumento) {
-        BigDecimal salarioAtual = funcionario.getSalario();
-        BigDecimal percentualReajuste = aumento.divide(salarioAtual, RoundingMode.HALF_UP);
+        validacoes.forEach(validacaoReajuste -> validacaoReajuste.validar(funcionario, aumento));
 
-        if (percentualReajuste.compareTo(new BigDecimal("0.4")) > 0) {
-            throw new ValidacaoException("Reajuste nao pode ser superior a 40% do salario!");
-        }
-
-        BigDecimal salarioReajustado = salarioAtual.add(aumento);
+        BigDecimal salarioReajustado = funcionario.getSalario().add(aumento);
 
         funcionario.atualizarSalario(salarioReajustado);
     }
