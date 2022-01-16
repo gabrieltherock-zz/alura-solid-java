@@ -1,4 +1,4 @@
-package br.com.gabriel.service;
+package br.com.gabriel.service.reajuste;
 
 import br.com.gabriel.model.Funcionario;
 

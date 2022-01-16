@@ -1,10 +1,9 @@
-package br.com.gabriel.service;
+package br.com.gabriel.service.reajuste;
 
 import br.com.gabriel.ValidacaoException;
 import br.com.gabriel.model.Funcionario;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
